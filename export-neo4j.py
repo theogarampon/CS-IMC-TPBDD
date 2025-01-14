@@ -63,7 +63,7 @@ with pyodbc.connect('DRIVER='+driver+';SERVER=tcp:'+server+';PORT=1433;DATABASE=
     exportedCount = 0
     cursor.execute("SELECT COUNT(1) FROM tArtist")
     totalCount = cursor.fetchval()
-    cursor.execute("SELECT idArtist, primaryName FROM TArtist")
+    cursor.execute("SELECT idArtist, primaryName, birthYear FROM TArtist")
     while True:
         importData = []
         rows = cursor.fetchmany(BATCH_SIZE)
@@ -74,7 +74,7 @@ with pyodbc.connect('DRIVER='+driver+';SERVER=tcp:'+server+';PORT=1433;DATABASE=
         for row in rows:
             # Créer un objet Node avec comme label Film et les propriétés adéquates
             # A COMPLETER
-            n = Node("Artist", idArtist=row[0], primaryName=row[1])
+            n = Node("Artist", idArtist=row[0], primaryName=row[1], birthYear = row[2])
             importData.append(n)
             i += 1
 
